@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Job - JobTracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body class="bg-white-50 min-h-screen text-gray-800 font-sans">
+
+<div class="flex flex-col md:flex-row min-h-screen">
+
+  <!-- ☰ Mobile Top Logo -->
+  <div id="mobilelogo" class="flex items-center justify-between bg-[#EFF6FF] p-4 md:hidden shadow">
+    <img src="logo.png" alt="Logo" class="h-8">
+  </div>
+
+  <!-- ✅ Sidebar -->
+  <aside id="mobileSidebar" class="hidden md:flex md:flex-col bg-[#EFF6FF] w-full md:w-64 text-gray-800 p-6 shadow-lg z-50 md:z-0 md:min-h-screen transition-transform duration-300">
+    <div class="flex flex-col h-full justify-between">
+      <div>
+        <!-- Logo -->
+        <div id="menulogo" class="flex justify-center mb-8">
+          <img src="logo.png" alt="Logo" class="h-8">
+        </div>
+
+        <nav class="flex flex-col items-center space-y-4 text-lg">
+          <a href="deshbord.html" class="doodle-nav-item">Dashboard</a>
+          <a href="#" class="doodle-nav-item">My Jobs</a>
+          <a href="#" class="doodle-nav-item">Reminders</a>
+          <a href="#" class="doodle-nav-item">Settings</a>
+          <a href="#" class="doodle-nav-item">Logout</a>
+        </nav>
+      </div>
+
+      <!-- Upgrade Box + Footer -->
+      <div class="mt-10 text-center">
+        <div class="bg-yellow-200 text-black font-bold rounded-lg p-4 text-sm">
+          <p class="mb-2">✨ Go PRO and unlock full job analytics!</p>
+          <button class="bg-yellow-100 text-black px-3 py-1 rounded font-medium">Upgrade</button>
+        </div>
+        <footer class="text-xs text-gray-400 mt-6 fuzzy-bubbles-regular flex flex-col items-center">
+          &copy; 2025 <strong>Khushi Koriya</strong>
+        </footer>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 fuzzy-bubbles-bold">Add New Job</h2>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6" action="#" method="POST">
+      <!-- Fields -->
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="company">Company Name *</label>
+        <input type="text" id="company" name="company" required class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="e.g. Google, Infosys" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="jobTitle">Job Title / Role *</label>
+        <input type="text" id="jobTitle" name="jobTitle" required class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="e.g. Python Developer" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="status">Application Status *</label>
+        <select id="status" name="status" required class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400">
+          <option value="">Select Status</option>
+          <option value="applied">Applied</option>
+          <option value="interview">Interview Scheduled</option>
+          <option value="offer">Offer Received</option>
+          <option value="rejected">Rejected</option>
+          <option value="saved">Saved</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="dateApplied">Date Applied *</label>
+        <input type="date" id="dateApplied" name="dateApplied" required class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="jobLink">Application Link</label>
+        <input type="url" id="jobLink" name="jobLink" class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="https://example.com/job-post" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="deadline">Deadline / Interview Date</label>
+        <input type="date" id="deadline" name="deadline" class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="location">Location</label>
+        <input type="text" id="location" name="location" class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="e.g. Remote, Bangalore, Hybrid" />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-gray-600 font-medium" for="contactEmail">Contact Person / HR Email</label>
+        <input type="email" id="contactEmail" name="contactEmail" class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="hr@example.com" />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block mb-1 text-gray-600 font-medium" for="notes">Notes / Comments</label>
+        <textarea id="notes" name="notes" rows="4" class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-pink-400" placeholder="Optional notes about this job, follow-ups, feedback etc."></textarea>
+      </div>
+
+      <div class="md:col-span-2 flex justify-end mt-4">
+        <button type="submit" class="doodle-btn px-6 py-2 text-sm sm:text-base">Save Job</button>
+      </div>
+    </form>
+  </main>
+</div>
+
+<!-- ✅ Toggle Button -->
+<button 
+  onclick="toggleSidebar()" 
+  id="sidebarToggle"
+  class="bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden cursor-move"
+  style="top: 80%; left: 85%;"
+>
+  ☰
+</button>
+
+
+<!-- ✅ Sidebar Toggle Script -->
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("mobileSidebar");
+    const mobilelogo = document.getElementById("mobilelogo");
+    const menulogo = document.getElementById("menulogo");
+    sidebar.classList.toggle("hidden");
+    if (window.innerWidth < 768) {
+      mobilelogo.classList.toggle("hidden");
+      menulogo.classList.toggle("hidden");
+    }
+  }
+
+  // ✅ Make Toggle Button Draggable
+  const toggleBtn = document.getElementById("sidebarToggle");
+  let isDragging = false;
+
+  toggleBtn.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    document.body.style.userSelect = "none";
+
+    let shiftX = e.clientX - toggleBtn.getBoundingClientRect().left;
+    let shiftY = e.clientY - toggleBtn.getBoundingClientRect().top;
+
+    function moveAt(pageX, pageY) {
+        const btnWidth = toggleBtn.offsetWidth;
+        const btnHeight = toggleBtn.offsetHeight;
+        const maxX = window.innerWidth - btnWidth;
+        const maxY = window.innerHeight - btnHeight;
+
+        let x = Math.min(Math.max(0, pageX - shiftX), maxX);
+        let y = Math.min(Math.max(0, pageY - shiftY), maxY);
+
+        toggleBtn.style.left = x + "px";
+        toggleBtn.style.top = y + "px";
+        }
+
+
+    function onMouseMove(e) {
+      if (isDragging) {
+        moveAt(e.pageX, e.pageY);
+      }
+    }
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    toggleBtn.onmouseup = function () {
+      isDragging = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      toggleBtn.onmouseup = null;
+      document.body.style.userSelect = "auto";
+    };
+  });
+
+  toggleBtn.ondragstart = () => false;
+</script>
+
+
+</body>
+</html>

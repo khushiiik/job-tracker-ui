@@ -65,3 +65,34 @@
   body::-webkit-scrollbar {
     display: none; 
   }
+
+.doodle-nav-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  border: 2px dashed transparent;
+  border-radius: var(--border-radius);
+  font-family: var(--font-doodle);
+  font-weight: 400;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Odd items - hover pink */
+.doodle-nav-item:nth-child(odd):hover {
+  background-color: var(--color-primary); /* pink */
+  border-color: var(--color-text);
+  transform: translate(-2px, -2px);
+}
+
+/* Even items - hover yellow */
+.doodle-nav-item:nth-child(even):hover {
+  background-color: var(--color-hover); /* yellow */
+  border-color: var(--color-text);
+  transform: translate(-2px, -2px);
+}
+
+#sidebarToggle {
+  position: fixed;
+  transition: all 0.3s ease-in-out;
+  z-index: 9999;
+  touch-action: none; /* 🟢 Prevent scroll conflicts on mobile */
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - JobTracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("mobileSidebar");
+      sidebar.classList.toggle("hidden");
+    }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-white font-sans">
+
+<div class="flex flex-col md:flex-row min-h-screen">
+
+  <!-- ☰ Mobile Navbar -->
+  <div id="mobilelogo" class="flex items-center justify-between bg-[#EFF6FF] p-4 md:hidden shadow">
+    <img src="logo.png" alt="Logo" class="h-8">
+  </div>
+
+  <!-- ✅ Sidebar (mobile + desktop) -->
+  <aside id="mobileSidebar" class="hidden md:flex md:flex-col bg-[#EFF6FF] w-full md:w-64 text-gray-800 p-6 shadow-lg z-50 md:z-0 md:min-h-screen">
+    <div class="flex flex-col h-full justify-between">
+      <div>
+        <div id="menulogo" class="flex justify-center mb-8">
+          <img src="logo.png" alt="Logo" class="h-8">
+        </div>
+        <nav class="flex flex-col items-center space-y-4 text-lg">
+          <a href="#" class="doodle-nav-item">Dashboard</a>
+          <a href="#" class="doodle-nav-item">My Jobs</a>
+          <a href="#" class="doodle-nav-item">Reminders</a>
+          <a href="#" class="doodle-nav-item">Settings</a>
+          <a href="#" class="doodle-nav-item">Logout</a>
+        </nav>
+      </div>
+
+      <!-- ✅ Footer Info -->
+      <div class="mt-10 text-center">
+        <div class="bg-yellow-200 text-black font-bold rounded-lg p-4 text-sm">
+          <p class="mb-2">✨ Go PRO and unlock full job analytics!</p>
+          <button class="bg-yellow-100 text-black px-3 py-1 rounded font-medium">Upgrade</button>
+        </div>
+        <footer class="text-xs text-gray-400 mt-6 fuzzy-bubbles-regular flex flex-col items-center">
+          &copy; 2025 <strong>Khushi Koriya</strong>
+        </footer>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">Welcome, Khushi! 👋</h2>
+        <p class="text-sm text-gray-500">Let's keep tracking your job hunt.</p>
+      </div>
+      <a href="add_job.html">
+        <button class="doodle-btn text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2">
+          + Add New Job
+        </button>
+      </a>
+    </div>
+
+
+<!-- Stats Section -->
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4 mb-8">
+  <div class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-sm text-gray-500">Total Applications</p>
+    <h3 class="text-xl font-semibold text-pink-700">15</h3>
+  </div>
+  <div class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-sm text-gray-500">Interviews Scheduled</p>
+    <h3 class="text-xl font-semibold text-yellow-500">4</h3>
+  </div>
+  <div class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-sm text-gray-500">Offers Received</p>
+    <h3 class="text-xl font-semibold text-green-600">2</h3>
+  </div>
+  <div class="bg-white rounded-lg shadow p-4 text-center">
+    <p class="text-sm text-gray-500">Rejected</p>
+    <h3 class="text-xl font-semibold text-red-500">3</h3>
+  </div>
+</div>
+
+
+
+    <!-- Notifications + Mascot -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+        <h4 class="text-lg font-semibold text-gray-700 mb-2">Notifications</h4>
+        <ul class="space-y-3">
+          <li class="bg-white p-4 rounded-lg shadow text-gray-700">📬 You applied to <strong>TCS</strong> for Frontend Developer.</li>
+          <li class="bg-white p-4 rounded-lg shadow text-gray-700">📅 Reminder: Interview with <strong>Google</strong> tomorrow at 10 AM.</li>
+          <li class="bg-white p-4 rounded-lg shadow text-gray-700">🎉 Congrats! You got an offer from <strong>Zoho</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- Mascot -->
+  <div class="hidden md:block w-full max-w-sm mx-auto lg:mx-0">
+  <img id="coffeeboy" src="coffee.png" alt="Dashboard Mascot" class="w-full object-contain rounded-xl" />
+</div>
+
+    </div>
+    <!-- ✅ Floating Toggle Button -->
+<button 
+  onclick="toggleSidebar()" 
+  id="sidebarToggle"
+  class="fixed bottom-4 right-4 z-50 bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden"
+>
+  ☰
+</button>
+
+  </main>
+</div>
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("mobileSidebar");
+    const mobilelogo = document.getElementById("mobilelogo");
+
+    sidebar.classList.toggle("hidden");
+
+    // Hide top logo only in mobile
+    if (window.innerWidth < 768) {
+      mobilelogo.classList.toggle("hidden");
+    }
+  }
+</script>
+
+
+</body>
+</html>

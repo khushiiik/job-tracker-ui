@@ -6,6 +6,7 @@
   <title>Responsive Auth Page</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="style.css" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <style>
   .doodle-btn-lg {
     width: 100%;
@@ -36,7 +37,7 @@
 <div class="block md:hidden relative min-h-screen flex flex-col bg-white">
   <!-- Bottom Doodle -->
   <div class="absolute bottom-0 left-0 w-full z-0">
-    <img src="image.png" alt="Doodle Background" class="w-full object-cover opacity-70" />
+    <img src="bottom.png" alt="Doodle Background" class="w-full object-cover opacity-70" />
   </div>
 
   <!-- Top Illustration -->
@@ -87,7 +88,7 @@
           <label class="block text-sm text-gray-600 mb-1">Password</label>
           <input type="password" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="••••••••" required />
         </div>
-        <button type="submit" class="doodle-btn-lg">Login</button>
+        <button type="submit" class="doodle-btn-lg"><a href="deshbord.html">Login</a></button>
         <p class="text-sm text-center mt-4 text-gray-600">Don't have an account? <a href="#signup" class="text-blue-500 hover:underline">Sign Up</a></p>
       </form>
     </div>
