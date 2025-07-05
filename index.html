@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Tracker Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<style>
+  :root {
+    --font-doodle: sans-serif;
+    --color-primary: #ffd9d9;
+    --color-hover: #fef7b4;
+    --color-text: #333;
+    --border: 2px dashed var(--color-text);
+    --border-radius: 10px;
+    --shadow-normal: 3px 3px 0 var(--color-text);
+    --shadow-hover: 5px 5px 0 #000;
+    --font-size-doodle: 1.2rem;
+  }
+
+
+  .fuzzy-bubbles-bold {
+    font-family: var(--font-doodle);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .fuzzy-bubbles-regular {
+    font-family: var(--font-doodle);
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .yellow-colored-box {
+    background-color: #eff6ff;
+    color: black;
+    padding: 1rem;
+
+  }
+  .doodle-btn {
+    font-family: var(--font-doodle);
+    font-weight: 400;
+    font-style: normal;
+    font-size: var(--font-size-doodle);
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    padding: 0.2rem 1.2rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-normal);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .doodle-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hover);
+    background-color: var(--color-hover);
+  }
+
+  html, body {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none; 
+  }
+</style>
+
+</head>
+
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center px-6 py-4 shadow-md bg-white">
+    <div class="text-xl font-bold">JobTracker</div>
+    <div>
+      <button>
+      <a href="#login" class="doodle-btn mr-1">Login</a></button>
+      <button><a href="#signup" class="doodle-btn mr-1">Signup</a></button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="text-center py-16 bg-blue-50 fuzzy-bubbles-bold">
+    <h1 class="text-4xl font-bold mb-4">Track Your Job Applications Smarter</h1>
+    <p class="text-lg max-w-xl mx-auto">Organize all your job applications in one place, never lose track of follow-ups or interviews again.</p>
+<img 
+  src="hero.png" 
+  alt="Job Tracker UI" 
+  class="mx-auto my-6 object-contain"
+  style="width: 600px; max-width: 100%; height: auto;"
+/>
+
+
+  </section>
+
+ 
+ <section class="py-16 bg-orange-50 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 items-center gap-12">
+    
+    <!-- Illustration -->
+    <div class="text-center md:text-left">
+      <img src="Illustration.png" alt="Working Illustration" class="w-full max-w-sm mx-auto md:mx-0">
+    </div>
+
+    <!-- Text Content -->
+    <div>
+      <h2 class="text-3xl font-bold text-orange-600 mb-2 fuzzy-bubbles-bold">Simple <span class="text-gray-900">Solutions!</span></h2>
+      
+      <ol class="space-y-4 text-gray-800 fuzzy-bubbles-regular">
+        <li><strong>1. Create an Account:</strong> Start your journey with us</li>
+        <li><strong>2. Add Jobs:</strong> Fill in company details, status, and deadlines</li>
+        <li><strong>3. Track Progress:</strong> View updates and upcoming interviews</li>
+        <li><strong>4. Stay Organized:</strong> Use filters and get reminders</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- CTA Section -->
+  <section class="yellow-colored-box text-white py-16 text-center">
+    <h2 class="text-3xl font-bold mb-4">Ready to take control of your job search?</h2>
+    <p class="text-lg mb-6">Let us help you stay organized and focused with our job tracking tool.</p>
+   <button class="doodle-btn">
+  Let's Get Started
+</button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-gray-500">
+    &copy; 2025 JobTracker | Built with ❤️ by Khushi Koriya
+  </footer>
+
+</body>
+</html>
