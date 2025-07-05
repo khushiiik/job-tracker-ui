@@ -109,30 +109,75 @@
 </div>
 
     </div>
-    <!-- ✅ Floating Toggle Button -->
+<!-- ✅ Toggle Button -->
 <button 
   onclick="toggleSidebar()" 
   id="sidebarToggle"
-  class="fixed bottom-4 right-4 z-50 bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden"
+  class="bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden cursor-move"
+  style="top: 80%; left: 85%;"
 >
   ☰
 </button>
 
   </main>
 </div>
+<!-- ✅ Sidebar Toggle Script -->
 <script>
   function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     const mobilelogo = document.getElementById("mobilelogo");
-
+    const menulogo = document.getElementById("menulogo");
     sidebar.classList.toggle("hidden");
-
-    // Hide top logo only in mobile
     if (window.innerWidth < 768) {
       mobilelogo.classList.toggle("hidden");
+      menulogo.classList.toggle("hidden");
     }
   }
+
+  // ✅ Make Toggle Button Draggable
+  const toggleBtn = document.getElementById("sidebarToggle");
+  let isDragging = false;
+
+  toggleBtn.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    document.body.style.userSelect = "none";
+
+    let shiftX = e.clientX - toggleBtn.getBoundingClientRect().left;
+    let shiftY = e.clientY - toggleBtn.getBoundingClientRect().top;
+
+    function moveAt(pageX, pageY) {
+        const btnWidth = toggleBtn.offsetWidth;
+        const btnHeight = toggleBtn.offsetHeight;
+        const maxX = window.innerWidth - btnWidth;
+        const maxY = window.innerHeight - btnHeight;
+
+        let x = Math.min(Math.max(0, pageX - shiftX), maxX);
+        let y = Math.min(Math.max(0, pageY - shiftY), maxY);
+
+        toggleBtn.style.left = x + "px";
+        toggleBtn.style.top = y + "px";
+        }
+
+
+    function onMouseMove(e) {
+      if (isDragging) {
+        moveAt(e.pageX, e.pageY);
+      }
+    }
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    toggleBtn.onmouseup = function () {
+      isDragging = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      toggleBtn.onmouseup = null;
+      document.body.style.userSelect = "auto";
+    };
+  });
+
+  toggleBtn.ondragstart = () => false;
 </script>
+
 
 
 </body>
