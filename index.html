@@ -7,78 +7,7 @@
   <title>Job Tracker Portal</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-
-<style>
-  html {
-  scroll-behavior: smooth;
-}
-
-  :root {
-    --font-doodle: sans-serif;
-    --color-primary: #ffd9d9;
-    --color-hover: #fef7b4;
-    --color-text: #333;
-    --border: 2px dashed var(--color-text);
-    --border-radius: 10px;
-    --shadow-normal: 3px 3px 0 var(--color-text);
-    --shadow-hover: 5px 5px 0 #000;
-    --font-size-doodle: 1.2rem;
-  }
-
-
-  .fuzzy-bubbles-bold {
-    font-family: var(--font-doodle);
-    font-weight: 700;
-    font-style: normal;
-  }
-
-  .fuzzy-bubbles-regular {
-    font-family: var(--font-doodle);
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .yellow-colored-box {
-    background-color: #eff6ff;
-    color: black;
-    padding: 1rem;
-
-  }
-
-  .doodle-btn {
-  font-family: var(--font-doodle);
-  font-weight: 400;
-  font-style: normal;
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  border: var(--border);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-normal);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  padding: 1; 
-  /* REMOVE font-size: inherit; */
-}
-
-  .doodle-btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: var(--shadow-hover);
-    background-color: var(--color-hover);
-  }
-
-  html, body {
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: none;
-    scrollbar-width: none; 
-  }
-
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    display: none; 
-  }
-
-</style>
+  <link href="style.css" rel="stylesheet"/>
 
 </head>
 
@@ -93,7 +22,7 @@
 
   <!-- Buttons -->
   <div class="flex space-x-1 sm:space-x-2">
-    <a href="#login" class="doodle-btn text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1">Login</a>
+    <a href="login.html" class="doodle-btn text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1">Login</a>
     <a href="#signup" class="doodle-btn text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1">Signup</a>
   </div>
 
@@ -145,9 +74,9 @@
   <section class="yellow-colored-box text-white py-16 text-center">
     <h2 class="text-3xl font-bold mb-4">Ready to take control of your job search?</h2>
     <p class="text-lg mb-6">Let us help you stay organized and focused with our job tracking tool.</p>
-   <button class="doodle-btn text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-2">
+   <a href="login.html" class="doodle-btn text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1">
       Let's Get Started
-    </button>
+    </a>
 
   </section>
 

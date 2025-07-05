@@ -1,0 +1,67 @@
+ html {
+  scroll-behavior: smooth;
+}
+
+  :root {
+    --font-doodle: sans-serif;
+    --color-primary: #ffd9d9;
+    --color-hover: #fef7b4;
+    --color-text: #333;
+    --border: 2px dashed var(--color-text);
+    --border-radius: 10px;
+    --shadow-normal: 3px 3px 0 var(--color-text);
+    --shadow-hover: 5px 5px 0 #000;
+    --font-size-doodle: 1.2rem;
+  }
+
+
+  .fuzzy-bubbles-bold {
+    font-family: var(--font-doodle);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .fuzzy-bubbles-regular {
+    font-family: var(--font-doodle);
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .yellow-colored-box {
+    background-color: #eff6ff;
+    color: black;
+    padding: 1rem;
+
+  }
+
+  .doodle-btn {
+  font-family: var(--font-doodle);
+  font-weight: 400;
+  font-style: normal;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-normal);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  padding: 1; 
+  /* REMOVE font-size: inherit; */
+}
+
+  .doodle-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hover);
+    background-color: var(--color-hover);
+  }
+
+  html, body {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none; 
+  }
