@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 // Firebase config
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -60,3 +61,29 @@ function setupSignupHandler(formId, nameId, emailId, passwordId, confirmId) {
 // Hook both forms
 setupSignupHandler("signupForm", "name", "email", "password", "confirmPassword");
 setupSignupHandler("signupFormDesktop", "name-d", "email-d", "password-d", "confirmPassword-d");
+
+// LOGIN FORM HANDLER
+function setupLoginHandler(formId, emailId, passwordId) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById(emailId).value.trim();
+    const password = document.getElementById(passwordId).value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      alert("Login successful!");
+      window.location.href = "deshbord.html";
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed: " + error.message);
+    }
+  });
+}
+
+// Apply to both mobile and desktop
+setupLoginHandler("loginForm", "email", "password");
+setupLoginHandler("loginFormDesktop", "email-d", "password-d");
