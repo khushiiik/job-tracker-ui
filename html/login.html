@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Responsive Auth Page</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="style.css" rel="stylesheet"/>
+  <link href="../css/style.css" rel="stylesheet"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+
   <style>
   .doodle-btn-lg {
     width: 100%;
@@ -33,16 +38,16 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-<!-- ✅ Mobile View -->
+<!-- Mobile View -->
 <div class="block md:hidden relative min-h-screen flex flex-col bg-white">
   <!-- Bottom Doodle -->
   <div class="absolute bottom-0 left-0 w-full z-0">
-    <img src="bottom.png" alt="Doodle Background" class="w-full object-cover opacity-70" />
+    <img src="../images/bottom.png" alt="Doodle Background" class="w-full object-cover opacity-70" />
   </div>
 
   <!-- Top Illustration -->
   <div class="bg-white rounded-b-3xl overflow-hidden z-10">
-    <img src="login.png" alt="Top Illustration" class="object-contain h-48 w-full mx-auto my-2" />
+    <img src="../images/login.png" alt="Top Illustration" class="object-contain h-48 w-full mx-auto my-2" />
   </div>
 
   <!-- Form -->
@@ -62,18 +67,18 @@
           <button type="submit" class="doodle-btn-lg">Login</button>
         </form>
       </div>
-      <p class="text-sm text-center text-gray-600 mt-6">Don't have an account? <a href="#" class="text-green-800 hover:underline">Sign Up</a></p>
+      <p class="text-sm text-center text-gray-600 mt-6">Don't have an account? <a href="signup.html" class="text-green-800 hover:underline">Sign Up</a></p>
     </div>
   </div>
 </div>
 
-<!-- ✅ Desktop View -->
+<!-- Desktop View -->
 <div class="hidden md:flex items-center justify-center min-h-screen px-4">
   <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl w-full grid md:grid-cols-2">
     
     <!-- Left Image -->
     <div class="hidden md:block bg-white-100">
-      <img src="login.png" alt="Login Illustration" class="h-full w-full object-contain" />
+      <img src="../images/login.png" alt="Login Illustration" class="h-full w-full object-contain" />
     </div>
 
     <!-- Right Form -->
@@ -89,12 +94,11 @@
           <input type="password" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="••••••••" required />
         </div>
         <button type="submit" class="doodle-btn-lg"><a href="deshbord.html">Login</a></button>
-        <p class="text-sm text-center mt-4 text-gray-600">Don't have an account? <a href="#signup" class="text-blue-500 hover:underline">Sign Up</a></p>
+        <p class="text-sm text-center mt-4 text-gray-600">Don't have an account? <a href="signup.html" class="text-blue-500 hover:underline">Sign Up</a></p>
       </form>
     </div>
-
   </div>
 </div>
-
+<script src="../scripts/auth.js"></script>
 </body>
 </html>

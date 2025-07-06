@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Add New Job - JobTracker</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
 </head>
 <body class="bg-white-50 min-h-screen text-gray-800 font-sans">
 
@@ -14,16 +14,16 @@
 
   <!-- ☰ Mobile Top Logo -->
   <div id="mobilelogo" class="flex items-center justify-between bg-[#EFF6FF] p-4 md:hidden shadow">
-    <img src="logo.png" alt="Logo" class="h-8">
+    <img src="../images/logo.png" alt="Logo" class="h-8">
   </div>
 
-  <!-- ✅ Sidebar -->
+  <!-- Sidebar -->
   <aside id="mobileSidebar" class="hidden md:flex md:flex-col bg-[#EFF6FF] w-full md:w-64 text-gray-800 p-6 shadow-lg z-50 md:z-0 md:min-h-screen transition-transform duration-300">
     <div class="flex flex-col h-full justify-between">
       <div>
         <!-- Logo -->
         <div id="menulogo" class="flex justify-center mb-8">
-          <img src="logo.png" alt="Logo" class="h-8">
+          <img src="../images/logo.png" alt="Logo" class="h-8">
         </div>
 
         <nav class="flex flex-col items-center space-y-4 text-lg">
@@ -48,7 +48,7 @@
     </div>
   </aside>
 
-  <!-- ✅ Main Content -->
+  <!-- Main Content -->
   <main class="flex-1 p-4 sm:p-6 lg:p-8">
     <h2 class="text-3xl font-bold text-gray-800 mb-6 fuzzy-bubbles-bold">Add New Job</h2>
 
@@ -113,7 +113,7 @@
   </main>
 </div>
 
-<!-- ✅ Toggle Button -->
+<!-- Toggle Button -->
 <button 
   onclick="toggleSidebar()" 
   id="sidebarToggle"
@@ -124,20 +124,16 @@
 </button>
 
 
-<!-- ✅ Sidebar Toggle Script -->
+<!-- Sidebar Toggle Script -->
 <script>
   function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     const mobilelogo = document.getElementById("mobilelogo");
-    const menulogo = document.getElementById("menulogo");
     sidebar.classList.toggle("hidden");
     if (window.innerWidth < 768) {
       mobilelogo.classList.toggle("hidden");
-      menulogo.classList.toggle("hidden");
     }
   }
-
-  // ✅ Make Toggle Button Draggable
   const toggleBtn = document.getElementById("sidebarToggle");
   let isDragging = false;
 
