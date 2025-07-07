@@ -51,8 +51,15 @@ function setupSignupHandler(formId, nameId, emailId, passwordId, confirmId) {
         createdAt: new Date(),
       });
 
-      alert("Sign up successful!");
-      window.location.href = "deshbord.html";
+alert("Sign up successful! Please select an avatar.");
+sessionStorage.setItem("loggedInUser", JSON.stringify({
+  uid: user.uid,
+  name,
+  email,
+  avatar
+}));
+window.location.href = "avatar.html";
+
     } catch (error) {
       console.error("Signup error:", error);
       alert(error.message);

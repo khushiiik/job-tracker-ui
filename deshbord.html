@@ -60,7 +60,27 @@
     <h2 class="text-2xl font-bold text-gray-800">Welcome, Khushi! 👋</h2>
     <p class="text-sm text-gray-500">Let's keep tracking your job hunt.</p>
   </div>
- <img id="userAvatar" src="images/avatars/default.svg" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black object-cover" />
+ <!-- Avatar & Dropdown -->
+<div class="relative inline-block text-left z-50">
+  <!-- Avatar Trigger -->
+  <button id="avatarBtn" class="focus:outline-none">
+    <img id="userAvatar" src="images/default.svg" alt="Avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black object-cover" />
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200">
+    <div class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
+      <span id="userEmail" class="block truncate">email@example.com</span>
+    </div>
+    <ul class="text-sm text-gray-700">
+      <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">👤 Profile</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">⚙️ Settings</a></li>
+    </ul>
+    <div class="border-t border-gray-100">
+      <button id="logoutBtn" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">🚪 Log out</button>
+    </div>
+  </div>
+</div>
 </div>
 
 <div class="flex flex-col items-end space-y-12 sm:top-5 sm:right-7">
@@ -123,81 +143,97 @@
 
   </main>
 </div>
-<!-- Sidebar Toggle Script -->
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("mobileSidebar");
-    const mobilelogo = document.getElementById("mobilelogo");
-    sidebar.classList.toggle("hidden");
-    if (window.innerWidth < 768) {
-      mobilelogo.classList.toggle("hidden");
-    }
-  }
+<script type="module">
+document.addEventListener("DOMContentLoaded", () => {
+  // ✅ Get user
+  const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  const avatarImg = document.getElementById("userAvatar");
+  const emailSpan = document.getElementById("userEmail");
 
-  const toggleBtn = document.getElementById("sidebarToggle");
-  let isDragging = false;
+  if (user?.avatar && avatarImg) avatarImg.src = user.avatar;
+  if (user?.email && emailSpan) emailSpan.textContent = user.email;
 
-  toggleBtn.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    document.body.style.userSelect = "none";
+  // ✅ Toggle avatar dropdown
+  const avatarBtn = document.getElementById("avatarBtn");
+  const profileDropdown = document.getElementById("profileDropdown");
 
-    let shiftX = e.clientX - toggleBtn.getBoundingClientRect().left;
-    let shiftY = e.clientY - toggleBtn.getBoundingClientRect().top;
-
-    function moveAt(pageX, pageY) {
-        const btnWidth = toggleBtn.offsetWidth;
-        const btnHeight = toggleBtn.offsetHeight;
-        const maxX = window.innerWidth - btnWidth;
-        const maxY = window.innerHeight - btnHeight;
-
-        let x = Math.min(Math.max(0, pageX - shiftX), maxX);
-        let y = Math.min(Math.max(0, pageY - shiftY), maxY);
-
-        toggleBtn.style.left = x + "px";
-        toggleBtn.style.top = y + "px";
-        }
-
-
-    function onMouseMove(e) {
-      if (isDragging) {
-        moveAt(e.pageX, e.pageY);
-      }
-    }
-
-    document.addEventListener("mousemove", onMouseMove);
-
-    toggleBtn.onmouseup = function () {
-      isDragging = false;
-      document.removeEventListener("mousemove", onMouseMove);
-      toggleBtn.onmouseup = null;
-      document.body.style.userSelect = "auto";
-    };
+  avatarBtn?.addEventListener("click", () => {
+    profileDropdown?.classList.toggle("hidden");
   });
 
-  toggleBtn.ondragstart = () => false;
-  const avatar = localStorage.getItem("selectedAvatar");
-  const userAvatarImg = document.getElementById("userAvatar");
-  if (avatar && userAvatarImg) {
-    userAvatarImg.src = avatar;
-  }
-</script>
-<script type="module">
-  const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
-  if (user && user.avatar) {
-    document.getElementById("userAvatar").src = user.avatar;
-  }
-</script>
-<script>
-  function handleAddJob() {
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  document.addEventListener("click", (e) => {
+    const isInside = avatarBtn?.contains(e.target) || profileDropdown?.contains(e.target);
+    if (!isInside) profileDropdown?.classList.add("hidden");
+  });
+
+  // ✅ Logout button
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  });
+
+  // ✅ Add Job auth check
+  window.handleAddJob = () => {
     if (!user) {
       alert("Please log in to add a new job.");
       window.location.href = "login.html";
     } else {
       window.location.href = "add_job.html";
     }
-  }
+  };
+
+  // ✅ Sidebar drag logic
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  let isDragging = false;
+
+  sidebarToggle?.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    document.body.style.userSelect = "none";
+
+    const shiftX = e.clientX - sidebarToggle.getBoundingClientRect().left;
+    const shiftY = e.clientY - sidebarToggle.getBoundingClientRect().top;
+
+    const moveAt = (pageX, pageY) => {
+      const btnWidth = sidebarToggle.offsetWidth;
+      const btnHeight = sidebarToggle.offsetHeight;
+      const maxX = window.innerWidth - btnWidth;
+      const maxY = window.innerHeight - btnHeight;
+
+      const x = Math.min(Math.max(0, pageX - shiftX), maxX);
+      const y = Math.min(Math.max(0, pageY - shiftY), maxY);
+
+      sidebarToggle.style.left = x + "px";
+      sidebarToggle.style.top = y + "px";
+    };
+
+    const onMouseMove = (e) => {
+      if (isDragging) moveAt(e.pageX, e.pageY);
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    sidebarToggle.onmouseup = () => {
+      isDragging = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      sidebarToggle.onmouseup = null;
+      document.body.style.userSelect = "auto";
+    };
+  });
+
+  sidebarToggle?.ondragstart = () => false;
+
+  // ✅ Sidebar toggle
+  window.toggleSidebar = () => {
+    const sidebar = document.getElementById("mobileSidebar");
+    const mobilelogo = document.getElementById("mobilelogo");
+    sidebar?.classList.toggle("hidden");
+    if (window.innerWidth < 768) {
+      mobilelogo?.classList.toggle("hidden");
+    }
+  };
+});
 </script>
+
 
 </body>
 </html>
