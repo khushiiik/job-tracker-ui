@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailSpan = document.getElementById("userEmail");
   const welcomeUser = document.getElementById("welcomeUser");
 
-  avatarImg.src = user.avatar || "images/default_avatar.svg";
+  avatarImg.src = user.avatar || "images/avatars/default.svg";
   emailSpan.textContent = user.email || "No email found";
   if (user.name) {
     welcomeUser.innerHTML = `Welcome, ${user.name}! 👋`;
@@ -32,16 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   });
 
-  // Add Job auth check
-  window.handleAddJob = () => {
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
-    if (!user) {
-      alert("Please log in to add a new job.");
-      window.location.href = "login.html";
-    } else {
-      window.location.href = "add_job.html";
-    }
-  };
+window.handleAddJob = function () {
+  const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  if (!user) {
+    alert("Please log in to add a new job.");
+    window.location.href = "login.html";
+  } else {
+    window.location.href = "add_job.html";
+  }
+};
+
 
   // Sidebar drag
   const sidebarToggle = document.getElementById("sidebarToggle");
@@ -81,7 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  sidebarToggle?.ondragstart = () => false;
+if (sidebarToggle) {
+  sidebarToggle.ondragstart = () => false;
+}
+
 
   // Sidebar toggle
   window.toggleSidebar = () => {
