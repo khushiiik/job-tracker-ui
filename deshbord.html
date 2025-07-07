@@ -6,30 +6,20 @@
   <title>Dashboard - JobTracker</title>
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("mobileSidebar");
-      sidebar.classList.toggle("hidden");
-    }
-  </script>
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Load your external JS file -->
-<script type="module" src="scripts/dashboard.js"></script>
-
+  <script type="module" src="scripts/dashboard.js" defer></script>
 </head>
 
 <body class="bg-white font-sans">
 
-
 <div class="flex flex-col md:flex-row min-h-screen">
-
   <!-- ☰ Mobile Navbar -->
   <div id="mobilelogo" class="flex items-center justify-between bg-[#EFF6FF] p-4 md:hidden shadow">
     <img src="images/logo.png" alt="Logo" class="h-8">
   </div>
 
-  <!-- Sidebar (mobile + desktop) -->
-  <aside id="mobileSidebar" class="hidden md:flex md:flex-col bg-[#EFF6FF] w-full md:w-64 text-gray-800 p-6 shadow-lg z-50 md:z-0 md:min-h-screen">
+  <!-- Sidebar -->
+  <aside id="mobileSidebar" class="hidden md:flex md:flex-col bg-[#EFF6FF] w-full md:w-64 text-gray-800 p-6 shadow-lg z-50 md:z-0 md:min-h-screen md:sticky md:top-0">
     <div class="flex flex-col h-full justify-between">
       <div>
         <div id="menulogo" class="flex justify-center mb-8">
@@ -40,8 +30,7 @@
           <a href="#" class="doodle-nav-item">Settings</a>
         </nav>
       </div>
-
-      <!-- Footer Info -->
+      <!-- Footer -->
       <div class="mt-10 text-center">
         <div class="bg-yellow-200 text-black font-bold rounded-lg p-4 text-sm">
           <p class="mb-2">✨ Go PRO and unlock full job analytics!</p>
@@ -54,65 +43,62 @@
     </div>
   </aside>
 
-<main class="relative flex-1 p-4 sm:p-6 lg:p-8">
+  <!-- Main Section -->
+  <main class="relative flex-1 p-4 sm:p-6 lg:p-8">
+    <!-- Header -->
+    <div class="w-full flex flex-row sm:flex-row items-start sm:items-center justify-between gap-1 mb-6">
+      <!-- Welcome Text -->
+      <div>
+        <h2 id="welcomeUser" class="text-2xl font-bold text-gray-800">Welcome! 👋</h2>
+        <p class="text-sm text-gray-500">Let's keep tracking your job hunt.</p>
+      </div>
 
- <!-- Header -->
-<div class="w-full flex flex-row sm:flex-row items-start sm:items-center justify-between gap-1 mb-6">
-  <!-- Welcome Text -->
-  <div>
-    <h2 class="text-2xl font-bold text-gray-800">Welcome, Khushi! 👋</h2>
-    <p class="text-sm text-gray-500">Let's keep tracking your job hunt.</p>
-  </div>
- <!-- Avatar & Dropdown -->
-<div class="relative inline-block text-left z-50">
-  <!-- Avatar Trigger -->
-  <button id="avatarBtn" class="focus:outline-none">
-    <img id="userAvatar" src="images/default.svg" alt="Avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black object-cover" />
-  </button>
-
-  <!-- Dropdown Menu -->
-  <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200">
-    <div class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
-      <span id="userEmail" class="block truncate">email@example.com</span>
+      <!-- Avatar & Dropdown -->
+      <div class="relative inline-block text-left z-50">
+        <button id="avatarBtn" class="focus:outline-none">
+          <img id="userAvatar" src="images/default_avatar.svg" alt="Avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black object-cover" />
+        </button>
+        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200">
+          <div class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
+            <span id="userEmail" class="block truncate text-gray-600">email@example.com</span>
+          </div>
+          <ul class="text-sm text-gray-700">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">👤 Profile</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">⚙️ Settings</a></li>
+          </ul>
+          <div class="border-t border-gray-100">
+            <button id="logoutBtn" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">🚪 Log out</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul class="text-sm text-gray-700">
-      <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">👤 Profile</a></li>
-      <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">⚙️ Settings</a></li>
-    </ul>
-    <div class="border-t border-gray-100">
-      <button id="logoutBtn" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">🚪 Log out</button>
+
+    <!-- Add Job Button -->
+    <div class="flex flex-col items-end space-y-12 sm:top-5 sm:right-7">
+      <button onclick="handleAddJob()" class="doodle-btn text-xs sm:text-sm px-1 py-2 sm:px-4 sm:py-2">
+        + Add New Job
+      </button>
     </div>
-  </div>
-</div>
-</div>
 
-<div class="flex flex-col items-end space-y-12 sm:top-5 sm:right-7">
-<button onclick="handleAddJob()" class="doodle-btn text-xs sm:text-sm px-1 py-2 sm:px-4 sm:py-2">
-  + Add New Job
-</button>
-
-
-</div>
-
-<!-- Stats Section -->
-<div class="grid grid-cols-2 gap-4 mt-10 sm:grid-cols-2  md:grid-cols-4 mb-8 sm:mt-1 sm:pt-5">
-  <div class="bg-white rounded-lg shadow p-4 text-center">
-    <p class="text-sm text-gray-500">Total Applications</p>
-    <h3 class="text-xl font-semibold text-pink-700">15</h3>
-  </div>
-  <div class="bg-white rounded-lg shadow p-4 text-center">
-    <p class="text-sm text-gray-500">Interviews Scheduled</p>
-    <h3 class="text-xl font-semibold text-yellow-500">4</h3>
-  </div>
-  <div class="bg-white rounded-lg shadow p-4 text-center">
-    <p class="text-sm text-gray-500">Offers Received</p>
-    <h3 class="text-xl font-semibold text-green-600">2</h3>
-  </div>
-  <div class="bg-white rounded-lg shadow p-4 text-center">
-    <p class="text-sm text-gray-500">Rejected</p>
-    <h3 class="text-xl font-semibold text-red-500">3</h3>
-  </div>
-</div>
+    <!-- Stats -->
+    <div class="grid grid-cols-2 gap-4 mt-10 sm:grid-cols-2 md:grid-cols-4 mb-8 sm:mt-1 sm:pt-5">
+      <div class="bg-white rounded-lg shadow p-4 text-center">
+        <p class="text-sm text-gray-500">Total Applications</p>
+        <h3 class="text-xl font-semibold text-pink-700">15</h3>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 text-center">
+        <p class="text-sm text-gray-500">Interviews Scheduled</p>
+        <h3 class="text-xl font-semibold text-yellow-500">4</h3>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 text-center">
+        <p class="text-sm text-gray-500">Offers Received</p>
+        <h3 class="text-xl font-semibold text-green-600">2</h3>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 text-center">
+        <p class="text-sm text-gray-500">Rejected</p>
+        <h3 class="text-xl font-semibold text-red-500">3</h3>
+      </div>
+    </div>
 
     <!-- Notifications + Mascot -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -121,30 +107,26 @@
         <ul class="space-y-3">
           <li class="bg-white p-4 rounded-lg shadow text-gray-700">📬 You applied to <strong>TCS</strong> for Frontend Developer.</li>
           <li class="bg-white p-4 rounded-lg shadow text-gray-700">📅 Reminder: Interview with <strong>Google</strong> tomorrow at 10 AM.</li>
-          <li class="bg-white p-4 rounded-lg shadow text-gray-700">📬 You applied to <strong>TCS</strong> for Frontend Developer.</li>
-          <li class="bg-white p-4 rounded-lg shadow text-gray-700">📅 Reminder: Interview with <strong>Google</strong> tomorrow at 10 AM.</li>
           <li class="bg-white p-4 rounded-lg shadow text-gray-700">🎉 Congrats! You got an offer from <strong>Zoho</strong>.</li>
         </ul>
       </div>
 
-      <!-- Mascot -->
-  <div class="hidden md:block w-full max-w-sm mx-auto lg:mx-0">
-  <img id="coffeeboy" src="images/coffee.png" alt="Dashboard Mascot" class="w-full object-contain rounded-xl" />
-</div>
-
+      <div class="hidden md:block w-full max-w-sm mx-auto lg:mx-0">
+        <img id="coffeeboy" src="images/coffee.png" alt="Dashboard Mascot" class="w-full object-contain rounded-xl" />
+      </div>
     </div>
 
-<!-- Toggle Button -->
-<button 
-  onclick="toggleSidebar()" 
-  id="sidebarToggle"
-  class="bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden cursor-move"
-  style="top: 80%; left: 85%;"
->
-  ☰
-</button>
-
+    <!-- Draggable Toggle -->
+    <button 
+      onclick="toggleSidebar()" 
+      id="sidebarToggle"
+      class="bg-pink-200 text-black border-2 border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition hover:bg-yellow-200 md:hidden cursor-move"
+      style="top: 80%; left: 85%; position: fixed;"
+    >
+      ☰
+    </button>
   </main>
 </div>
+
 </body>
 </html>

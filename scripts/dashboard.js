@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  const user = JSON.parse(sessionStorage.getItem("loggedInUser")) || {};
 
-  // Avatar & email
+  // Avatar & name/email
   const avatarImg = document.getElementById("userAvatar");
   const emailSpan = document.getElementById("userEmail");
-  if (user?.avatar && avatarImg) avatarImg.src = user.avatar;
-  if (user?.email && emailSpan) emailSpan.textContent = user.email;
+  const welcomeUser = document.getElementById("welcomeUser");
 
-  // Avatar dropdown toggle
+  avatarImg.src = user.avatar || "images/default_avatar.svg";
+  emailSpan.textContent = user.email || "No email found";
+  if (user.name) {
+    welcomeUser.innerHTML = `Welcome, ${user.name}! 👋`;
+  }
+
+  // Dropdown toggle
   const avatarBtn = document.getElementById("avatarBtn");
   const profileDropdown = document.getElementById("profileDropdown");
 
@@ -16,8 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("click", (e) => {
-    const isInside = avatarBtn?.contains(e.target) || profileDropdown?.contains(e.target);
-    if (!isInside) profileDropdown?.classList.add("hidden");
+    if (!avatarBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+      profileDropdown.classList.add("hidden");
+    }
   });
 
   // Logout
@@ -28,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add Job auth check
   window.handleAddJob = () => {
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
     if (!user) {
       alert("Please log in to add a new job.");
       window.location.href = "login.html";
@@ -56,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const x = Math.min(Math.max(0, pageX - shiftX), maxX);
       const y = Math.min(Math.max(0, pageY - shiftY), maxY);
 
-      sidebarToggle.style.left = x + "px";
-      sidebarToggle.style.top = y + "px";
+      sidebarToggle.style.left = `${x}px`;
+      sidebarToggle.style.top = `${y}px`;
     };
 
     const onMouseMove = (e) => {
@@ -76,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sidebarToggle?.ondragstart = () => false;
 
-  // Toggle sidebar
+  // Sidebar toggle
   window.toggleSidebar = () => {
     const sidebar = document.getElementById("mobileSidebar");
     const mobilelogo = document.getElementById("mobilelogo");
