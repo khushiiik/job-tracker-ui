@@ -143,8 +143,8 @@
 
   </main>
 </div>
+
 <script type="module">
-document.addEventListener("DOMContentLoaded", () => {
   // ✅ Get user
   const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
   const avatarImg = document.getElementById("userAvatar");
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   });
 
-  // ✅ Add Job auth check
+  // ✅ Add Job auth check — NOW this will work
   window.handleAddJob = () => {
     if (!user) {
       alert("Please log in to add a new job.");
@@ -231,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
       mobilelogo?.classList.toggle("hidden");
     }
   };
-});
 </script>
 
 
