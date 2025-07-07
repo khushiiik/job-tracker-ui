@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Your Avatar</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <style>
+    .avatar-option {
+      border: 2px dashed transparent;
+      border-radius: 100%;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+    .avatar-option:hover {
+      transform: scale(1.05);
+    }
+    .avatar-option.selected {
+      border-color: #333;
+      box-shadow: 3px 3px 0 #333;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-lg rounded-lg max-w-4xl w-full mx-auto p-8 sm:p-10">
+    <h2 class="text-2xl font-bold text-center mb-6">Choose Your Avatar</h2>
+
+    <!-- Avatar Grid -->
+    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4 justify-center items-center">
+      <img src="images/avatars/avatar1.svg" alt="Avatar 1" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar2.svg" alt="Avatar 2" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar3.svg" alt="Avatar 3" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar4.svg" alt="Avatar 4" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar5.svg" alt="Avatar 5" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar6.svg" alt="Avatar 6" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar7.svg" alt="Avatar 7" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar8.svg" alt="Avatar 8" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar9.svg" alt="Avatar 9" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar10.svg" alt="Avatar 10" class="avatar-option w-20 h-20" />
+      <img src="images/avatars/avatar11.svg" alt="Avatar 11" class="avatar-option w-20 h-20" />
+    </div>
+
+    <!-- Next Button -->
+    <div class="mt-8 flex justify-end">
+      <button class="doodle-btn px-6 py-2">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const avatars = document.querySelectorAll('.avatar-option');
+
+    avatars.forEach(avatar => {
+      avatar.addEventListener('click', () => {
+        avatars.forEach(a => a.classList.remove('selected'));
+        avatar.classList.add('selected');
+        localStorage.setItem("selectedAvatar", avatar.getAttribute("src"));
+      });
+    });
+
+    document.querySelector(".doodle-btn").addEventListener("click", () => {
+      const selected = localStorage.getItem("selectedAvatar");
+      if (!selected) {
+        alert("Please select an avatar first!");
+      } else {
+        window.location.href = "deshbord.html";
+      }
+    });
+  </script>
+</body>
+</html>
