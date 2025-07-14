@@ -1,25 +1,14 @@
 // Firebase Imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { app } from "./firebase_init.js"; // This brings the initialized app
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyBc_JRIjhZinTB2QY_YiEJFSO0O0Dl6Y64",
-  authDomain: "jobtracker-995a4.firebaseapp.com",
-  projectId: "jobtracker-995a4",
-  storageBucket: "jobtracker-995a4.firebasestorage.app",
-  messagingSenderId: "108615657910",
-  appId: "1:108615657910:web:3edd79e785b43687713917",
-  measurementId: "G-XJPYQHRNY5"
-};
-
-// Init
-const app = initializeApp(firebaseConfig);
+// Init Auth and Firestore
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ✅ Signup Logic
+
+// Signup Logic
 function setupSignupHandler(formId, nameId, emailId, passwordId, confirmId) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -58,6 +47,7 @@ sessionStorage.setItem("loggedInUser", JSON.stringify({
   email,
   avatar
 }));
+sessionStorage.setItem("avatarFrom", "signup");
 window.location.href = "avatar.html";
 
     } catch (error) {

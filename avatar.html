@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet"/>
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-  <script src="scripts/avatar.js" defer></script>
+  <script type="module" src="scripts/avatar.js"></script>
 
   <style>
     .avatar-option {
@@ -80,44 +80,21 @@
         </label>
       </div>
 
-      <!-- ✅ Next Button -->
-      <div class="mt-8 flex justify-end">
-        <button type="submit" id="nextBtn" class="doodle-btn px-6 py-2">Next</button>
-      </div>
+      <!-- Next Button -->
+<div class="mt-8 flex justify-end gap-4">
+  <!-- Done button (for profile updates) -->
+  <button type="button" id="doneBtn" class="hidden doodle-btn px-6 py-2 bg-green-500 hover:bg-green-600 text-white">
+    Done
+  </button>
+
+  <!-- Next button (for signup flow) -->
+  <button type="submit" id="nextBtn" class="hidden doodle-btn px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white">
+    Next
+  </button>
+</div>
+
     </form>
   </div>
 
-  <!-- ✅ Script to handle selection + navigation -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const avatarImgs = document.querySelectorAll(".avatar-option");
-
-      avatarImgs.forEach(img => {
-        img.addEventListener("click", () => {
-          avatarImgs.forEach(i => i.classList.remove("selected"));
-          img.classList.add("selected");
-          img.previousElementSibling.checked = true;
-        });
-      });
-
-      const form = document.getElementById("avatarForm");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const selected = document.querySelector("input[name='avatar']:checked");
-        if (!selected) {
-          alert("Please select an avatar.");
-          return;
-        }
-
-        const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
-        user.avatar = selected.value;
-        sessionStorage.setItem("loggedInUser", JSON.stringify(user));
-        localStorage.setItem("selectedAvatar", selected.value); // optional use for Firestore
-
-        window.location.href = "deshbord.html";
-      });
-    });
-  </script>
 </body>
 </html>

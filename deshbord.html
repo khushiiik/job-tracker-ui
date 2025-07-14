@@ -54,23 +54,41 @@
       </div>
 
       <!-- Avatar & Dropdown -->
-      <div class="relative inline-block text-left z-50">
-        <button id="avatarBtn" class="focus:outline-none">
-          <img id="userAvatar" src="images/avatars/default.svg" alt="Avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black object-cover" />
-        </button>
-        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200">
-          <div class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
-            <span id="userEmail" class="block truncate text-gray-600">email@example.com</span>
-          </div>
-          <ul class="text-sm text-gray-700">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">👤 Profile</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">⚙️ Settings</a></li>
-          </ul>
-          <div class="border-t border-gray-100">
-            <button id="logoutBtn" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">🚪 Log out</button>
-          </div>
-        </div>
-      </div>
+<div class="relative inline-block text-left z-50">
+  <!-- Avatar Button with dashed circle -->
+  <button id="avatarBtn" class="focus:outline-none rounded-full border-2 border-dashed border-black p-1 hover:shadow-lg transition">
+    <img id="userAvatar"
+         src="images/avatars/default.svg"
+         alt="Avatar"
+         class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover" />
+  </button>
+
+  <!-- Dropdown with dashed border -->
+  <div id="profileDropdown"
+       class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border-2 border-dashed border-black">
+    
+    <div class="px-4 py-3 text-sm text-gray-700 border-b border-gray-200">
+      <span id="userEmail" class="block truncate text-gray-600">email@example.com</span>
+    </div>
+
+    <ul class="text-sm text-gray-700">
+      <li>
+        <a href="avatar.html" class="block px-4 py-2 hover:bg-gray-100">👤 Profile</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100">⚙️ Settings</a>
+      </li>
+    </ul>
+
+    <div class="border-t border-gray-200">
+      <button id="logoutBtn"
+              class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+        🚪 Log out
+      </button>
+    </div>
+  </div>
+</div>
+
     </div>
 
     <!-- Add Job Button -->

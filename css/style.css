@@ -14,6 +14,8 @@
     --font-size-doodle: 1.2rem;
   }
 
+  .transition { transition: all 0.2s ease-in-out; }
+
 
   .fuzzy-bubbles-bold {
     font-family: var(--font-doodle);

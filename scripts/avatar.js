@@ -1,67 +1,82 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+// Firebase Imports
+import { app } from "./firebase_init.js"; // ✅ This brings the initialized app
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  // Your Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBc_JRIjhZinTB2QY_YiEJFSO0O0Dl6Y64",
-    authDomain: "jobtracker-995a4.firebaseapp.com",
-    projectId: "jobtracker-995a4",
-    storageBucket: "jobtracker-995a4.firebasestorage.app",
-    messagingSenderId: "108615657910",
-    appId: "1:108615657910:web:3edd79e785b43687713917",
-    measurementId: "G-XJPYQHRNY5"
-  };
+// Init Auth and Firestore
+const db = getFirestore(app);
 
-  // Init Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
+document.addEventListener("DOMContentLoaded", () => {
+  const avatarImgs = document.querySelectorAll(".avatar-option");
+  const nextBtn = document.getElementById("nextBtn");
+  const doneBtn = document.getElementById("doneBtn");
 
-  // ✅ Handle avatar selection & Firestore update
-  document.addEventListener("DOMContentLoaded", () => {
-    const avatars = document.querySelectorAll(".avatar-option");
-    const nextBtn = document.querySelector(".doodle-btn");
+  //  Get context: "signup" or "profile"
+  const avatarFrom = sessionStorage.getItem("avatarFrom") || "profile";
 
-    let selectedAvatar = "";
+  // Show proper button
+  if (avatarFrom === "signup") {
+    nextBtn.classList.remove("hidden");
+  } else {
+    doneBtn.classList.remove("hidden");
+  }
 
-    avatars.forEach(avatar => {
-      avatar.addEventListener("click", () => {
-        avatars.forEach(a => a.classList.remove("selected"));
-        avatar.classList.add("selected");
-        selectedAvatar = avatar.getAttribute("src");
-      });
-    });
-
-    nextBtn.addEventListener("click", async () => {
-      if (!selectedAvatar) {
-        alert("Please select an avatar first!");
-        return;
-      }
-
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const userRef = doc(db, "users", user.uid);
-
-          try {
-            // ✅ Update avatar in Firestore
-            await updateDoc(userRef, { avatar: selectedAvatar });
-
-            // ✅ Update sessionStorage for current session use
-            const userData = JSON.parse(sessionStorage.getItem("loggedInUser")) || {};
-            userData.avatar = selectedAvatar;
-            sessionStorage.setItem("loggedInUser", JSON.stringify(userData));
-
-            // ✅ Redirect to dashboard
-            window.location.href = "deshbord.html";
-          } catch (err) {
-            console.error("Failed to update avatar in Firestore:", err);
-            alert("Something went wrong while saving your avatar.");
-          }
-        } else {
-          alert("User not logged in.");
-          window.location.href = "login.html";
-        }
-      });
+  //  Handle avatar selection
+  avatarImgs.forEach(img => {
+    img.addEventListener("click", () => {
+      avatarImgs.forEach(i => i.classList.remove("selected"));
+      img.classList.add("selected");
+      img.previousElementSibling.checked = true;
     });
   });
+
+  // Shared avatar saving function
+  async function saveAvatar() {
+    const selected = document.querySelector("input[name='avatar']:checked");
+    if (!selected) {
+      alert("Please select an avatar.");
+      return;
+    }
+
+    const avatarUrl = selected.value;
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+    if (!user || !user.uid) {
+      alert("User session not found. Please log in again.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    try {
+      // Only update Firestore if user is from "profile"
+      if (avatarFrom === "profile") {
+        const userRef = doc(db, "users", user.uid);
+        await updateDoc(userRef, { avatar: avatarUrl });
+      }
+
+      user.avatar = avatarUrl;
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+      localStorage.setItem("selectedAvatar", avatarUrl);
+
+      if (avatarFrom === "profile") {
+        alert("Avatar updated successfully!");
+      }
+
+      sessionStorage.setItem("avatarFrom", "profile");
+      window.location.href = "deshbord.html";
+    } catch (error) {
+      console.error("Failed to save avatar:", error);
+      alert("Failed to save avatar. Please try again.");
+    }
+  }
+
+  // Events for both buttons
+  document.getElementById("avatarForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    saveAvatar();
+  });
+
+  doneBtn.addEventListener("click", () => {
+    saveAvatar();
+  });
+});
