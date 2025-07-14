@@ -1,7 +1,7 @@
 // Firebase Imports
 import { app } from "./firebase_init.js"; // ✅ This brings the initialized app
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 // Init Auth and Firestore
 const db = getFirestore(app);
