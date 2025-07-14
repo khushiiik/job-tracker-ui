@@ -5,7 +5,13 @@ import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstati
 
 // Init Auth and Firestore
 const db = getFirestore(app);
+const auth = getAuth();
 
+const currentUser = auth.currentUser;
+if (!currentUser || currentUser.uid !== user.uid) {
+  alert("Session mismatch. Please log in again.");
+  return;
+}
 document.addEventListener("DOMContentLoaded", () => {
   const avatarImgs = document.querySelectorAll(".avatar-option");
   const nextBtn = document.getElementById("nextBtn");
