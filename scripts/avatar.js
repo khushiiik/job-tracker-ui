@@ -5,7 +5,7 @@ import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstati
 
 // Init Auth and Firestore
 const db = getFirestore(app);
-const auth = getAuth();
+const auth = getAuth(app);
 
 const currentUser = auth.currentUser;
 if (!currentUser || currentUser.uid !== user.uid) {
@@ -38,43 +38,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Shared avatar saving function
   async function saveAvatar() {
-    const selected = document.querySelector("input[name='avatar']:checked");
-    if (!selected) {
-      alert("Please select an avatar.");
-      return;
-    }
-
-    const avatarUrl = selected.value;
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
-
-    if (!user || !user.uid) {
-      alert("User session not found. Please log in again.");
-      window.location.href = "login.html";
-      return;
-    }
-
-    try {
-      // Only update Firestore if user is from "profile"
-      if (avatarFrom === "profile") {
-        const userRef = doc(db, "users", user.uid);
-        await updateDoc(userRef, { avatar: avatarUrl });
-      }
-
-      user.avatar = avatarUrl;
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
-      localStorage.setItem("selectedAvatar", avatarUrl);
-
-      if (avatarFrom === "profile") {
-        alert("Avatar updated successfully!");
-      }
-
-      sessionStorage.setItem("avatarFrom", "profile");
-      window.location.href = "deshbord.html";
-    } catch (error) {
-      console.error("Failed to save avatar:", error);
-      alert("Failed to save avatar. Please try again.");
-    }
+  const selected = document.querySelector("input[name='avatar']:checked");
+  if (!selected) {
+    alert("Please select an avatar.");
+    return;
   }
+
+  const avatarUrl = selected.value;
+  const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+  if (!user || !user.uid) {
+    alert("User session not found. Please log in again.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const currentUser = auth.currentUser;
+  if (!currentUser || currentUser.uid !== user.uid) {
+    alert("Session mismatch. Please log in again.");
+    return;
+  }
+
+  try {
+    if (avatarFrom === "profile") {
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, { avatar: avatarUrl });
+    }
+
+    user.avatar = avatarUrl;
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+    localStorage.setItem("selectedAvatar", avatarUrl);
+
+    if (avatarFrom === "profile") {
+      alert("Avatar updated successfully!");
+    }
+
+    sessionStorage.setItem("avatarFrom", "profile");
+    window.location.href = "deshbord.html";
+  } catch (error) {
+    console.error("Failed to save avatar:", error);
+    alert("Failed to save avatar. Please try again.");
+  }
+}
+
 
   // Events for both buttons
   document.getElementById("avatarForm").addEventListener("submit", (e) => {
